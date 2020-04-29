@@ -13,5 +13,9 @@
         <TextBox x:Name="tbLCDLine2"  HorizontalAlignment="Center"  Padding="20,15,15,15" Height="94" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="725" BorderThickness="3" FontSize="48" FontFamily="Arial" FontWeight="Normal" Background="#BF000000" Foreground="#FF707070" IsReadOnly="True" AllowFocusOnInteraction="False" TextAlignment="Left" BorderBrush="#FF0D0D0F" Margin="0,219,0,0"/>
         <TextBlock x:Name="tbStatus" HorizontalAlignment="Center" Margin="0,32,0,0" TextWrapping="Wrap" Text="Not connected yet !" VerticalAlignment="Top" Width="725" Height="23" Foreground="#FF9835E0" FocusVisualPrimaryBrush="#9835E001"/>
         <TextBox x:Name="tbLCDLine1" HorizontalAlignment="Center" Padding="20,15,15,15" Height="94" Margin="0,111,0,0" TextWrapping="Wrap" Text=""  VerticalAlignment="Top" Width="725" BorderThickness="3" FontSize="48" FontFamily="Arial" FontWeight="Normal" Foreground="#FF707070" Background="#BF000000" AllowFocusOnInteraction="False" IsReadOnly="True" TextAlignment="Left" BorderBrush="#FF0D0D0F"/>
+        <Button Margin="721,-3,0,0" VerticalAlignment="Top" Click="Button_Click">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE713;" FocusVisualPrimaryBrush="#FFF7F1F1" Foreground="#FF707070" FontSize="48"/>
+        </Button>
+
     </Grid>
 </Page>

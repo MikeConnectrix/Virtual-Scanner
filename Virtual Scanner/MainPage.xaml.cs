@@ -25,9 +25,11 @@ namespace Virtual_Scanner
     public sealed partial class MainPage : Page
     {
         private ChromeSocketComms socket = null;
+        private ChromeDBComms chromeDB = null;
         IPAddress ipAddress = null;
         private int server_port = 8899;
         string file_log_entry = "";
+        private bool SocketRunMode = false;
 
         public MainPage()
         {
@@ -36,12 +38,29 @@ namespace Virtual_Scanner
 
             IPHostEntry ipHost = Dns.GetHostEntry("");
             ipAddress = ipHost.AddressList.Where(p => p.ToString().StartsWith("172")).FirstOrDefault();
-            SetUpSocket();
+            if (SocketRunMode)
+                SetUpSocket();
+            else
+                SetUpDatabase();
+
             txtBarcode.Focus(FocusState.Programmatic);
             InputPane.GetForCurrentView().TryHide();
         }
-        
-        
+
+        private void SetUpDatabase()
+        {
+            WriteLogEntryToFile("Starting Database Mode...");
+
+            if (chromeDB != null) chromeDB.Dispose();
+
+            chromeDB = new ChromeDBComms("Database=AusSteel;Server=ntdev03bber.bestbar.local;User Id=Mike;Password=Monday2019!", this);
+            chromeDB.SetLCDDisplay(tbLCDLine1, tbLCDLine2, tbStatus);
+            chromeDB.storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+            //socket.SocketError += Socket_SocketError;
+            //socket.RefreshDisplay += Socket_RefreshDisplay;
+            //socket.Connect();
+        }
+
         private void txtBarcode_KeyUp(object sender, KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -135,9 +154,8 @@ namespace Virtual_Scanner
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            socket.CloseChromeSocket();
-
-            this.Frame.Navigate(typeof(GUIPage));
+            this.Frame.Navigate(typeof(Security));
         }
+
     }
 }
